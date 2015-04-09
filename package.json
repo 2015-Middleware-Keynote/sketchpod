@@ -1,0 +1,28 @@
+{
+  "name": "1K-cattle",
+  "description": "A basic http server example, inspired by Raynos/http-framework",
+  "version": "0.1.0",
+  "private": false,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "dependencies": {
+    "config-multipaas": "^0.1.0",
+    "routes-router": "^4.1.2",
+    "send-data": "^7.0.0",
+    "st": "^0.5.3"
+  },
+  "devDependencies": {
+    "tap": "^0.4.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryanj/1k-cattle.git"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "CC0",
+  "main": "server.js"
+}
