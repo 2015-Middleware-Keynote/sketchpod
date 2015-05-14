@@ -10,12 +10,14 @@ var cc       = require('config-multipaas'),
 var app      = Router()
 
 // Default state:
-var unknown_user_id = 'unknown'
-var unknown_claim = 'not claimed'
+var unknown_client_id = 'unknown client id'
+var unknown_user_name = 'unclaimed'
+var unknown_submission= 'no doodle'
 
 var config   = cc().add({
-  user_id : process.env.DEMO_USER_ID || unknown_user_id,
-  claim : process.env.DEMO_CLAIM || unknown_claim
+  CUID : process.env.CUID || unknown_client_id,
+  USERNAME : process.env.USERNAME || unknown_user_name,
+  SUBMISSION : process.env.SUBMISSION || unknown_submission
 })
 
 // Routes
@@ -26,8 +28,9 @@ app.addRoute("/status", function (req, res, opts, cb) {
 app.addRoute("/", function (req, res, opts, cb) {
   var index = fs.readFileSync(__dirname + '/index.html');
   var html  = index.toString()
-               .replace( /\{\{USER_ID\}\}/, config.get('user_id'))
-               .replace( /\{\{CLAIM\}\}/, config.get('claim'))
+               .replace( /\{\{SUBMISSION\}\}/, config.get('SUBMISSION'))
+               .replace( /\{\{USERNAME\}\}/, config.get('USERNAME'))
+               .replace( /\{\{CUID\}\}/, config.get('CUID'))
   sendHtml(req, res, {
     body: html,
     statusCode: 200,

@@ -1,0 +1,90 @@
+{
+    "kind": "List",
+    "creationTimestamp": null,
+    "apiVersion": "v1beta1",
+    "items": [
+        {
+            "kind": "Service",
+            "id": "APPNAME",
+            "creationTimestamp": null,
+            "apiVersion": "v1beta1",
+            "port": 8080,
+            "portName": "APPNAME-tcp-8080",
+            "protocol": "TCP",
+            "containerPort": 8080,
+            "selector": {
+                "deploymentconfig": "APPNAME"
+            },
+            "ports": [
+                {
+                    "name": "APPNAME-tcp-8080",
+                    "protocol": "TCP",
+                    "port": 8080,
+                    "containerPort": 8080
+                }
+            ]
+        },
+        {
+            "kind": "Route",
+            "apiVersion": "v1beta1",
+            "metadata": {
+                "name": "APPNAME"
+            },
+            "host": "APPNAME-summit3.apps.summit.paas.ninja",
+            "serviceName": "APPNAME"
+        },
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "v1beta1",
+            "metadata": {
+                "name": "APPNAME",
+                "creationTimestamp": null
+            },
+            "triggers": [
+                {
+                    "type": "ConfigChange"
+                }
+            ],
+            "template": {
+                "strategy": {
+                    "type": "Recreate"
+                },
+                "controllerTemplate": {
+                    "replicas": 1,
+                    "replicaSelector": {
+                        "deploymentconfig": "APPNAME"
+                    },
+                    "podTemplate": {
+                        "desiredState": {
+                            "manifest": {
+                                "version": "v1beta2",
+                                "id": "",
+                                "volumes": null,
+                                "containers": [
+                                    {
+                                        "name": "APPNAME",
+                                        "image": "ryanj/restify-base",
+                                        "ports": [
+                                            {
+                                                "name": "APPNAME-tcp-8080",
+                                                "containerPort": 8080,
+                                                "protocol": "TCP"
+                                            }
+                                        ],
+                                        "resources": {},
+                                        "imagePullPolicy": "",
+                                        "capabilities": {}
+                                    }
+                                ],
+                                "restartPolicy": {}
+                            }
+                        },
+                        "labels": {
+                            "deploymentconfig": "APPNAME"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

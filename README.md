@@ -1,14 +1,14 @@
-# 1k-cattle [![Dependency Check](http://img.shields.io/david/ryanj/1k-cattle.svg)](https://david-dm.org/ryanj/1k-cattle)
+# DoodlePod [![Dependency Check](http://img.shields.io/david/ryanj/doodlepod.svg)](https://david-dm.org/ryanj/doodlepod)
 
-[![Launch on OpenShift](https://launch-shifter.rhcloud.com/launch.svg)](https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=nodejs-0.10&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2F1k-cattle.git&name=cattle)
+[![Launch on OpenShift](https://launch-shifter.rhcloud.com/launch.svg)](https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=nodejs-0.10&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2Fdoodlepod.git&name=cattle)
 
 To deploy a clone of this application using the [`rhc` command line tool](http://rubygems.org/gems/rhc):
 
-    rhc app create cattle nodejs-0.10 --from-code=https://github.com/ryanj/1k-cattle.git
+    rhc app create cattle nodejs-0.10 --from-code=https://github.com/ryanj/doodlepod.git
     
-Or [link to a web-based clone+deploy](https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=nodejs-0.10&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2F1k-cattle.git) on [OpenShift Online](http://OpenShift.com) or on [your own OpenShift cloud](http://openshift.github.io): 
+Or [link to a web-based clone+deploy](https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=nodejs-0.10&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2Fdoodlepod.git) on [OpenShift Online](http://OpenShift.com) or on [your own OpenShift cloud](http://openshift.github.io): 
 
-    https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=nodejs-0.10&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2F1k-cattle.git
+    https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=nodejs-0.10&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2Fdoodlepod.git
 
 ## Local Development
 Install dependencies:
@@ -20,15 +20,27 @@ npm install
 Start a local server, passing in config via the environment:
 
 ```bash
-DEMO_USER_ID=007 DEMO_CLAIM="openshift for the win!" npm start
+CUID=007 USERNAME=foo SUBMISSION="openshift for the win!" npm start
 ```
 
 ## Docker
-To run [the related docker image](https://registry.hub.docker.com/u/ryanj/1k-cattle/):
+To run [the related docker image](https://registry.hub.docker.com/u/ryanj/doodlepod/):
 
 ```bash
-docker pull ryanj/1k-cattle
-docker run -d -p 8080:8080 -e "HOSTNAME=localhost" -e "DEMO_USER_ID=007" -e "DEMO_CLAIM=openshift for the win!" ryanj/1k-cattle
+docker pull ryanj/doodlepod
+docker run -d -p 8080:8080 -e "HOSTNAME=localhost" -e "CUID=007" -e "USERNAME=user007" -e "SUBMISSION=openshift for the win!" ryanj/doodlepod
+```
+
+## OpenShiftV3
+First, choose an application name for this service and update the template to replace all instances of `APP_NAME`:
+
+```bash
+sed -i -e 's/APPNAME/doodlepod/g' app_template.json
+```
+
+Then, launch the service using the `osc` command-line tool:
+```bash
+osc create -f app_template.json
 ```
 
 ## License
