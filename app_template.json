@@ -63,7 +63,7 @@
                                 "containers": [
                                     {
                                         "name": "APPNAME",
-                                        "image": "ryanj/restify-base",
+                                        "image": "ryanj/doodlepod",
                                         "ports": [
                                             {
                                                 "name": "APPNAME-tcp-8080",
