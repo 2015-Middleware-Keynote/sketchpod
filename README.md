@@ -26,7 +26,7 @@ CUID=007 USERNAME=foo SUBMISSION="openshift for the win!" npm start
 Next, load the index page to check the initial content.  Then run upload an image by running the `post_image.manual.js` script in another terminal:
 
 ```bash
-node post_image.manual.js
+OPENSHIFT_SERVER="http://localhost:8080" node post_image.manual.js
 ```
 
 Reload the index page to verify that the doodlepod has received it's content submission.
