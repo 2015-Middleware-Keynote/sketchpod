@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "config-multipaas": "^0.1.0",
-    "restify": "^3.0.2"
+    "request": "^2.55.0",
+    "restify": "^3.0.2",
+    "rx": "^2.5.2",
+    "ws": "^0.7.1"
   },
   "devDependencies": {
     "tap": "^0.4.13"

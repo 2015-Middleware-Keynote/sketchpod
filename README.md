@@ -1,10 +1,10 @@
 # DoodlePod [![Dependency Check](http://img.shields.io/david/ryanj/doodlepod.svg)](https://david-dm.org/ryanj/doodlepod)
 
-[![Launch on OpenShift](https://launch-shifter.rhcloud.com/launch.svg)](https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=nodejs-0.10&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2Fdoodlepod.git&name=cattle)
+[![Launch on OpenShift](https://launch-shifter.rhcloud.com/launch.svg)](https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=nodejs-0.10&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2Fdoodlepod.git&name=doodlepod)
 
 To deploy a clone of this application using the [`rhc` command line tool](http://rubygems.org/gems/rhc):
 
-    rhc app create cattle nodejs-0.10 --from-code=https://github.com/ryanj/doodlepod.git
+    rhc app create doodlepod nodejs-0.10 --from-code=https://github.com/ryanj/doodlepod.git
     
 Or [link to a web-based clone+deploy](https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=nodejs-0.10&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2Fdoodlepod.git) on [OpenShift Online](http://OpenShift.com) or on [your own OpenShift cloud](http://openshift.github.io): 
 
@@ -22,6 +22,14 @@ Start a local server, passing in config via the environment:
 ```bash
 CUID=007 USERNAME=foo SUBMISSION="openshift for the win!" npm start
 ```
+
+Next, load the index page to check the initial content.  Then run upload an image by running the `post_image.manual.js` script in another terminal:
+
+```bash
+node post_image.manual.js
+```
+
+Reload the index page to verify that the doodlepod has received it's content submission.
 
 ## Docker
 To run [the related docker image](https://registry.hub.docker.com/u/ryanj/doodlepod/):
