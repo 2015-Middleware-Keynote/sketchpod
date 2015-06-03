@@ -5868,7 +5868,6 @@ body {
 .info .status-container h1 {
   line-height: 35px;
   margin: 0;
-  display: inline-block;
 }
 .info .status-container strong {
   display: inline-block;
