@@ -46,6 +46,7 @@ var receiveImage = function(req, res, next) {
 }
 
 // Routes
+app.head('/status', function (req, res, next) { res.send() });
 app.get('/status', function (req, res, next) { res.send("{status: 'ok'}"); });
 app.put('/doodle', receiveImage);
 app.get('/', function (req, res, next) {
