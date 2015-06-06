@@ -39,15 +39,16 @@ var receiveImage = function(req, res, next) {
         sketch.username = query.username;
         sketch.cuid = query.cuid;
         sketch.submission = query.submission;
-        return res.json(sketch);
+        res.json(sketch);
+        return next()
       });
     })
   });
 }
 
 // Routes
-app.head('/status', function (req, res, next) { res.send() });
-app.get('/status', function (req, res, next) { res.send("{status: 'ok'}"); });
+app.head('/status', function (req, res, next) { res.send(); return next(); });
+app.get('/status', function (req, res, next) { res.send("{status: 'ok'}"); return next() });
 app.put('/doodle', receiveImage);
 app.get('/', function (req, res, next) {
   var html  = index.toString()
@@ -57,6 +58,7 @@ app.get('/', function (req, res, next) {
   res.status(200);
   res.header('Content-Type', 'text/html');
   res.end(html.replace(/host:port/g, req.header('Host')));
+  return next();
 })
 
 // Serve all the static assets prefixed at /static
