@@ -39,18 +39,21 @@ var receiveImage = function(req, res, next) {
         sketch.username = query.username;
         sketch.cuid = query.cuid;
         sketch.submission = query.submission;
-        res.json(sketch);
-        return next()
+        return res.json(sketch);
       });
     })
   });
 }
 
 // Routes
+app.put('/doodle', receiveImage);
+app.post('/doodle', receiveImage);
+app.put('/doodle/', receiveImage);
+app.post('/doodle/', receiveImage);
 app.head('/status', function (req, res, next) { res.send(); return next(); });
 app.get('/status', function (req, res, next) { res.send("{status: 'ok'}"); return next() });
-app.put('/doodle', receiveImage);
 app.get('/', function (req, res, next) {
+  console.log("username:" + sketch.username);
   var html  = index.toString()
              .replace( /\{\{SUBMISSION\}\}/, sketch.submission)
              .replace( /\{\{USERNAME\}\}/, sketch.username)
