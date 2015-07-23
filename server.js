@@ -25,7 +25,7 @@ var receiveImage = function(req, res, next) {
     next(err);
   });
   req.on('end', function() {
-    var filename = './static/img/doodle.png';
+    var filename = os.tmpdir() + '/sketch.png';
     fs.open(filename, 'w', function(err, fd) {
       if (err) {
         next(err);
@@ -62,6 +62,9 @@ app.get('/', function (req, res, next) {
   res.header('Content-Type', 'text/html');
   res.end(html.replace(/host:port/g, req.header('Host')));
   return next();
+})
+app.get('/sketch.png', function (req, res, next) {
+  fs.createReadStream(os.tmpdir() + '/sketch.png').pipe(res);
 })
 
 // Serve all the static assets prefixed at /static
