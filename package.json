@@ -1,5 +1,5 @@
 {
-  "name": "doodlepod",
+  "name": "sketchpod",
   "description": "A basic http server example, inspired by Raynos/http-framework",
   "version": "0.1.0",
   "private": false,
@@ -9,16 +9,17 @@
   },
   "dependencies": {
     "config-multipaas": "^0.1.0",
+    "patternfly": "^2.8.0",
     "request": "^2.55.0",
     "restify": "^3.0.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ryanj/doodlepod.git"
+    "url": "https://github.com/ryanj/sketchpod.git"
   },
   "scripts": {
     "start": "node server.js"
   },
-  "license": "CC0",
+  "license": "MIT",
   "main": "server.js"
 }
