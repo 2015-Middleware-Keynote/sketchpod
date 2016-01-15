@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "config-multipaas": "^0.1.0",
+    "express": "^4.13.3",
     "patternfly": "^2.8.0",
-    "request": "^2.55.0",
-    "restify": "^3.0.2"
+    "request": "^2.55.0"
   },
   "repository": {
     "type": "git",

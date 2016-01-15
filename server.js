@@ -1,10 +1,13 @@
-var cc       = require('config-multipaas'),
-    fs       = require('fs'),
-    os       = require('os'),
-    restify  = require('restify')
-    querystring = require('querystring');
+'use strict';
 
-var app = restify.createServer();
+var cc       = require('config-multipaas')
+  , express = require('express')
+  , app = express()
+  , path = require('path')
+  , router = express.Router()
+  , http = require('http')
+  , os       = require('os')
+  , fs = require('fs')
 
 var config = cc();
 
@@ -30,7 +33,7 @@ var receiveImage = function(req, res, next) {
       if (err) {
         next(err);
       };
-      var query = querystring.parse(req.query());
+      var query = req.query;
       fs.write(fd, data, 0, data.length, 0, function(err, written, buffer) {
         if (err) {
           next(err);
@@ -50,25 +53,29 @@ app.put('/doodle', receiveImage);
 app.post('/doodle', receiveImage);
 app.put('/doodle/', receiveImage);
 app.post('/doodle/', receiveImage);
-app.head('/status', function (req, res, next) { res.send(); return next(); });
-app.get('/status', function (req, res, next) { res.send("{status: 'ok'}"); return next() });
+app.head('/status', function (req, res, next) { res.send(); });
+app.get('/status', function (req, res, next) { res.send("{status: 'ok'}"); });
 app.get('/', function (req, res, next) {
   console.log("username:" + sketch.username);
   var html  = index.toString()
              .replace( /\{\{SUBMISSION\}\}/, sketch.submission)
              .replace( /\{\{USERNAME\}\}/, sketch.username)
              .replace( /\{\{CUID\}\}/, sketch.cuid)
-  res.status(200);
-  res.header('Content-Type', 'text/html');
-  res.end(html.replace(/host:port/g, req.header('Host')));
-  return next();
+  res.send(html.replace(/host:port/g, req.header('Host')));
 })
 app.get('/sketch.png', function (req, res, next) {
-  fs.createReadStream(os.tmpdir() + '/sketch.png').pipe(res);
+  fs.stat(os.tmpdir() + '/sketch.png', function(err){
+    if(err){
+      res.send('404', 404);
+    }else{
+      fs.createReadStream(os.tmpdir() + '/sketch.png').pipe(res);
+    }
+  })
 })
 
 // Serve all the static assets prefixed at /static
-app.get('.*', restify.serveStatic({directory: './static/'}));
+app.use('/lib', express.static(path.join(__dirname, 'node_modules')));
+app.use(express.static(path.join(__dirname, 'static')));
 
 app.listen(config.get('PORT'), config.get('IP'), function () {
   console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT') )
