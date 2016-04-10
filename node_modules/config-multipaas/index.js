@@ -42,7 +42,7 @@ var exports = module.exports = function () {
   return conf
     .add(cc.env('OPENSHIFT_NODEJS_'), 'openshift-nodejs')
     .add(cc.env('OPENSHIFT_'), 'openshift-env')
-    .set('HOSTNAME', process.env.OPENSHIFT_APP_DNS, 'openshift-env')
+    .add(filterundefs(cloud_env.defaults.openshift), 'v2-defaults')
     .add(filterundefs(cloud_env.defaults.cloud), 'cloud-defaults')
     .add(filterundefs(cloud_env.defaults.v3), 'openshift-v3-defaults')
 }

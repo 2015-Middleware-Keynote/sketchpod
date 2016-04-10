@@ -66,7 +66,7 @@ app.get('/', function (req, res, next) {
 app.get('/sketch.png', function (req, res, next) {
   fs.stat(os.tmpdir() + '/sketch.png', function(err){
     if(err){
-      res.send('404', 404);
+      res.status(404).send("404 (Not Found)");
     }else{
       fs.createReadStream(os.tmpdir() + '/sketch.png').pipe(res);
     }
