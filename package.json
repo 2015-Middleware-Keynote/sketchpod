@@ -10,7 +10,7 @@
   "dependencies": {
     "config-multipaas": "^0.2.2",
     "express": "^4.13.4",
-    "patternfly": "^3.3.3",
+    "patternfly": "^3.4.0",
     "request": "^2.71.0"
   },
   "repository": {
